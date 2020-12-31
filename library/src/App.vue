@@ -1,13 +1,12 @@
 <template>
   <v-app>
-    <!-- default icon font for Vuetify -->
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <v-navigation-drawer app
       expand-on-hover>
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
-            <v-img src="./assets/ficus_logo.png"></v-img>
+            <v-img :src="require('./assets/logo.png')"></v-img>
           </v-list-item-avatar>
         </v-list-item>
       </v-list>
@@ -25,8 +24,11 @@
       </v-list-item>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <!-- -->
+    <v-app-bar app
+      collapse-on-scroll
+      color="teal lighten-3"
+    >
+      <v-toolbar-title>汎思數據</v-toolbar-title>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
