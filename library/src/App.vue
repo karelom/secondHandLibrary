@@ -2,6 +2,7 @@
   <v-app>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <v-navigation-drawer app
+      permanent
       expand-on-hover>
       <v-list>
         <v-list-item class="px-2">
@@ -10,6 +11,14 @@
           </v-list-item-avatar>
         </v-list-item>
       </v-list>
+      <v-list-item link to="/Account">
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Sandra Adams
+          </v-list-item-title>
+          <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
       <v-list-item link to='/'>
         <v-list-item-icon>
           <v-icon>mdi-home</v-icon>
@@ -23,7 +32,6 @@
         <v-list-item-title>Intro</v-list-item-title>
       </v-list-item>
     </v-navigation-drawer>
-
     <v-app-bar app
       collapse-on-scroll
       color="teal lighten-3"
@@ -33,7 +41,6 @@
 
     <!-- Sizes your content based upon application components -->
     <v-main>
-
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
 
@@ -64,6 +71,14 @@ export default {
     this.$http.post('/api/user/post').then(data => {
       console.log(data)
     })
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+
   }
 }
 </script>

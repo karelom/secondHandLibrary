@@ -10,19 +10,14 @@ mongoose.connect('mongodb://localhost/Test', err => {
 })
 
 // 登录模式
-const logins = new mongoose.Schema({
+const loginSchema = new mongoose.Schema({
   username: String,
-  password: String,
-  userimg: {
-    type: String,
-    default: 'avatar0' // 用户默认头像
-  }
+  password: String
+  // ,userimg: {
+  //   type: String,
+  //   default: 'avatar0' // 用户默认头像
+  // }
 })
 
-// 要导出的模型Model
-const Models = {
-  Logins: mongoose.model('logins', logins)
-}
-
 // 導出模型
-module.exports = Models
+module.exports = mongoose.model('Login', loginSchema)

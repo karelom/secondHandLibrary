@@ -13,11 +13,7 @@ export default {
     }
   },
   methods: {
-    get () {
-      this.$http.post('/api/user/login').then(data => {
-        console.log(data)
-      })
-    }
+
   }
 }
 </script>

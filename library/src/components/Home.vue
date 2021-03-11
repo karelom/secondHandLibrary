@@ -14,7 +14,6 @@
           ></v-carousel-item>
         </v-carousel>
         <p>{{ msg }}</p>
-        <button v-on:click='get'>Get</button>
     </div>
 </template>
 
@@ -41,11 +40,7 @@ export default {
     }
   },
   methods: {
-    get () {
-      this.$http.post('/api/user/login').then(data => {
-        console.log(data)
-      })
-    }
+
   }
 }
 </script>
