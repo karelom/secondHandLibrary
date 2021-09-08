@@ -11,7 +11,14 @@
           </v-list-item-avatar>
         </v-list-item>
       </v-list>
-      <v-list-item link to="/Account">
+      <v-list-item @updateIsLogin="check($event)" v-show="!isLogin" link to="/Login">
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Login
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item @updateIsLogin="check($event)" v-show="isLogin" link to='/Account'>
         <v-list-item-content>
           <v-list-item-title class="title">
             Sandra Adams
@@ -25,7 +32,7 @@
         </v-list-item-icon>
         <v-list-item-title>Home</v-list-item-title>
       </v-list-item>
-      <v-list-item link to='/Intro'>
+      <v-list-item @click="test()" link to='/Intro'>
         <v-list-item-icon>
           <v-icon>mdi-domain</v-icon>
         </v-list-item-icon>
@@ -58,11 +65,13 @@
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 <script>
 import VueResource from '@/resource' // 'resource' for vue3.0 to access http; 'axios' for vue2.0
-// import home from './components/HelloWorld'
+import Login from './components/Login'
+import Account from './components/Account'
 export default {
   name: 'App',
   components: {
-      // home
+      Login,
+      Account
   },
   mounted () {
     this.$http.get('/api/user/get').then(data => {
@@ -74,11 +83,22 @@ export default {
   },
   data () {
     return {
-
+      isLogin: false
     }
   },
   methods: {
-
+    test () {
+      console.log("yoo")
+      this.$emit('updateIsLogin', 'true')
+    }
+  },
+  computed: {
+    check (v) {
+      console.log("hi")
+      this.isLogin = v
+      // this.$login = !this.$login
+      console.log(this.isLogin)
+    }
   }
 }
 </script>

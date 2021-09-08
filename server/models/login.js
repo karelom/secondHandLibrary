@@ -4,7 +4,9 @@ const mongoose = require('mongoose')
 // 连接mongodb数据库
 // 参数1：mongodb数据库启动的地址
 // 参数2：回调函数，用于判断是否连接成功
-mongoose.connect('mongodb://localhost/Test', err => {
+const connectionURL = 'mongodb://localhost/Test'
+const passOption = { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect(connectionURL, passOption, err => {
   if (err) console.log('*************【資料庫連接失敗】*************')
   else console.log('*************【資料庫連接成功】*************')
 })

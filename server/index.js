@@ -1,11 +1,10 @@
 const Login = require('./models/login')
-const bodyParser = require('body-parser')
-const express = require('express')
 const Mongoose = require('mongoose')
+const express = require('express')
 const app = express()
-app.use(bodyParser.json())
-// app.use(cors());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+
 
 app.get('/user/get', (req, res) => {
   res.send('get訪問成功')
@@ -22,15 +21,15 @@ app.post('/user/login', (req, res) => {
   .where('password', pw)
   .countDocuments(function (err, count) {
     if (err) console.log(err)
-    if (count > 0) res.send("使用者登入成功")
+    if (count == 1) res.send("使用者登入成功")
     else res.send("使用者登入失敗")
   })
 })
 app.listen(9500, () => console.log('************* [伺服器啟動成功] *************'))
 
 // const newLogin = new Login({
-//   username: "karelom",
-//   password: "asd250"
+//   username: "test",
+//   password: "1234"
 // })
 // const doc = newLogin.save(function (err) {
 //   if (err) return handleError(err); 

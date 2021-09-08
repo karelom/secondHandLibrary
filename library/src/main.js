@@ -6,6 +6,7 @@ import router from '@/router/router'
 import vuetify from '@/plugins/vuetify'
 
 Vue.config.productionTip = false
+Vue.prototype.$login = false /* determine if user has login */
 
 /* eslint-disable no-new */
 new Vue({
