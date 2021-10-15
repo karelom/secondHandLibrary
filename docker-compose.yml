@@ -1,0 +1,30 @@
+version: '3.8'
+
+# 定義 service 的區塊，一個 service 設定可以用來啟動多個 container
+services:
+  library:
+    container_name: my-app
+    build: ./library
+    ports:
+    - "8080:80"
+    depends_on:
+      - server
+
+  server:
+    image: node:lts-alpine
+    stdin_open: true
+    container_name: my-app-server
+    working_dir: /app-server
+    volumes:
+    - ./server:/app-server
+    command: npm run start
+    ports:
+    - "9500:9500"
+    depends_on:
+      - mongo
+      
+  mongo:
+    image: mongo:4.4.1
+    container_name: mongo
+    ports:
+      - '27017:27017'

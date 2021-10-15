@@ -1,15 +1,18 @@
 {
-  "name": "server",
+  "name": "node-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node package/src/index.js"
   },
-  "author": "",
+  "author": "JuiYang HSU",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }

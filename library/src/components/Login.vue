@@ -37,7 +37,7 @@
 
         <v-btn
             :loading="loading"
-            @click="login()">Login</v-btn>
+            @click="login">Login</v-btn>
     </div>
 </template>
 
@@ -58,19 +58,23 @@ export default {
   },
   methods: {
     async login () {
+      // this.$emit('updateIsLogin', true)
       this.loading = true
       const article = {
         acc: this.account,
         pw: this.password
       }
-      this.$http.post('/api/user/login', article).then(data => {
-        console.log(data.body)
-        if (data.body === '使用者登入成功') {
-          this.$emit('updateIsLogin', true)
+      this.$http.post('api/posts/login', article).then(data => {
+        console.log(data.bodyText)
+        let isLogin
+        if (data.bodyText === '使用者登入成功') {
+          isLogin = true
           this.$router.push('/')
         } else {
-          this.$emit('updateIsLogin', false)
+          isLogin = false
         }
+        this.$emit('updateIsLogin', isLogin)
+        this.$route.params.isLogin = isLogin
       })
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.loading = false
