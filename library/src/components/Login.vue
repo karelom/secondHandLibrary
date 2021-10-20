@@ -58,12 +58,20 @@ export default {
   },
   methods: {
     async login () {
-      // this.$emit('updateIsLogin', true)
       this.loading = true
       const article = {
         acc: this.account,
         pw: this.password
       }
+
+      // this.$http.delete('api/posts/' + article.acc).then(data => {
+      //   console.log(data.bodyText)
+      // })
+
+      // this.$http.put('api/posts', article).then(data => {
+      //   console.log(data.bodyText)
+      // })
+
       this.$http.post('api/posts/login', article).then(data => {
         console.log(data.bodyText)
         let isLogin

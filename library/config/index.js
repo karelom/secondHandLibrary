@@ -12,7 +12,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:9500', // 接口的域名
+        // target: 'http://node-api:9500', // docker
+        target: 'http://localhost:9500', // 接口的域名 local test
+
         pathRewrite: {
           '^/api': ''// 需要将/api重写为''
         },

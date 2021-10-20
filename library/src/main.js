@@ -9,12 +9,20 @@ Vue.config.productionTip = false
 Vue.prototype.$login = false /* determine if user has login */
 
 /* eslint-disable no-new */
+// compiler
+// new Vue({
+//   el: '#app',
+//   router,
+//   vuetify,
+//   components: {
+//     App
+//   },
+//   template: '<App/>'
+// })
+
+// runtime
 new Vue({
-  el: '#app',
   router,
   vuetify,
-  components: {
-    App
-  },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')

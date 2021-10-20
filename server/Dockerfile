@@ -1,8 +1,9 @@
 # build stage
 FROM node:lts-alpine
-WORKDIR /app
+# FROM node:10
+WORKDIR /app/api
 COPY package*.json ./
 RUN npm install
-COPY . .
+# COPY . .
 EXPOSE 9500
-CMD [ "node", "index" ]
+CMD [ "npm", "run", "dev" ]

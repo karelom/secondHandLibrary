@@ -1,2 +1,1 @@
-cd package/src
-[node.js command prompt] nodemon index
+[node.js command prompt] npm run dev

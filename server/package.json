@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node package/src/index.js"
+    "start": "node package/src/index.js",
+    "dev": "nodemon package/src/index.js"
   },
   "author": "JuiYang HSU",
   "license": "ISC",

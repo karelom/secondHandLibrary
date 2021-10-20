@@ -73,7 +73,7 @@ export default {
     Login: Login
   },
   mounted () {
-    this.$http.post('api/posts').then(data => {
+    this.$http.get('api/posts').then(data => {
       console.log(data)
     })
   },
