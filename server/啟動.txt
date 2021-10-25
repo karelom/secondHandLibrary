@@ -1,1 +1,1 @@
-[node.js command prompt] node index
+[node.js command prompt] npm run dev

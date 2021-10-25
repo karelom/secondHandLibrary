@@ -1,0 +1,29 @@
+version: '3.8'
+
+# 定義 service 的區塊，一個 service 設定可以用來啟動多個 container
+services:
+  vue-cli:
+    build: ./client
+    ports:
+      - "8080:8080"
+    container_name: vue-ui
+    volumes: 
+      - ./client:/app/my-app
+      - /app/my-app/node_modules
+
+  node-api:
+    build: ./server
+    ports:
+      - "9500:9500"
+    container_name: node-api
+    volumes:
+      - ./server:/app/api
+      - /app/api/node_modules
+    depends_on:
+      - mongo
+      
+  mongo:
+    image: mongo:4.4.1
+    container_name: mongo
+    ports:
+      - '27017:27017'
