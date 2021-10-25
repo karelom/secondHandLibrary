@@ -3,12 +3,12 @@ version: '3.8'
 # 定義 service 的區塊，一個 service 設定可以用來啟動多個 container
 services:
   vue-cli:
-    build: ./library
+    build: ./client
     ports:
-      - "8080:80"
+      - "8080:8080"
     container_name: vue-ui
     volumes: 
-      - ./library:/app/my-app
+      - ./client:/app/my-app
       - /app/my-app/node_modules
 
   node-api:

@@ -61,30 +61,37 @@
     </v-footer>
   </v-app>
 </template>
-
-<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 <script>
-import VueResource from '@/resource' // 'resource' for vue3.0 to access http; 'axios' for vue2.0
-import Login from './components/Login'
+import UserService from './UserService'
 
 export default {
   name: 'App',
   components: {
-    Login: Login
-  },
-  mounted () {
-    this.$http.get('api/posts').then(data => {
-      console.log(data)
-    })
+
   },
   data () {
     return {
-      isLogin: false
+      isLogin: false,
+      posts: [], // get the result of axios
+      error: '' // get the error of axios
     }
+  },
+  async created () {
+    try {
+      this.posts = await UserService.getUser()
+      console.log(this.posts)
+    } catch (err) {
+      this.error = err.message
+    }
+  },
+  mounted () {
+    // this.$http.get('api/posts').then(data => {
+    //   console.log(data)
+    // })
   },
   methods: {
     check (isLogin) {
-      console.log("hi")
+      console.log('hi')
       this.isLogin = isLogin
     }
   },

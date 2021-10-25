@@ -18,9 +18,9 @@ router.get('/', (req, res) => {
 
 // Check User Data
 router.post('/login', async (req, res) => {
-    const acc = req.body['acc']
-    const pw = req.body['pw']
-    // console.log(req.body)
+    const acc = req.body.user.acc
+    const pw = req.body.user.pw
+    // console.log(req.body.user)
     await loadUserCollection().find({
         username: acc,
         password: pw

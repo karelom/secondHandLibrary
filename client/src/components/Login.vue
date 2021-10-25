@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import UserService from '../UserService'
+
 export default {
   name: 'login',
   data () {
@@ -64,26 +66,26 @@ export default {
         pw: this.password
       }
 
-      // this.$http.delete('api/posts/' + article.acc).then(data => {
-      //   console.log(data.bodyText)
-      // })
+    //   this.$http.delete('api/posts/' + article.acc).then(data => {
+    //     console.log(data.bodyText)
+    //   })
 
-      // this.$http.put('api/posts', article).then(data => {
-      //   console.log(data.bodyText)
-      // })
+    //   this.$http.put('api/posts', article).then(data => {
+    //     console.log(data.bodyText)
+    //   })
 
-      this.$http.post('api/posts/login', article).then(data => {
-        console.log(data.bodyText)
-        let isLogin
-        if (data.bodyText === '使用者登入成功') {
-          isLogin = true
-          this.$router.push('/')
-        } else {
-          isLogin = false
-        }
-        this.$emit('updateIsLogin', isLogin)
-        this.$route.params.isLogin = isLogin
-      })
+      let result = await UserService.checkUser(article)
+      console.log(result.data)
+      let isLogin
+      if (result.data === '使用者登入成功') {
+        isLogin = true
+        this.$router.push('/')
+      } else {
+        isLogin = false
+      }
+      this.$emit('updateIsLogin', isLogin)
+      this.$route.params.isLogin = isLogin
+
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.loading = false
     }

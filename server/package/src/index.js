@@ -7,7 +7,7 @@ app.use(express.json()) // for parsing application/json
 // 設置跨域訪問
 app.all('*', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*") // 允許任何來源的跨來源請求
-    res.header("Access-Control-Allow-Headers", "X-Requested-With") // 允許的非「簡單」header
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept") // 允許的非「簡單」header
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS") // 允許的 HTTP 方法
     res.header("X-Powered-By",' 3.2.1')
     res.header("Content-Type", "application/json;charset=utf-8")

@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 // for findOneAndUpdate() & findOneAndDelete()
 mongoose.set('useFindAndModify', false)
 
-// const connectionURL = 'mongodb://mongo:27017/Test' // docker
-const connectionURL = 'mongodb://localhost:27017/Test' // local test
+const connectionURL = 'mongodb://mongo:27017/Test' // docker
+// const connectionURL = 'mongodb://localhost:27017/Test' // local test
 
 // 连接mongodb数据库
 // 参数1：mongodb数据库启动的地址
