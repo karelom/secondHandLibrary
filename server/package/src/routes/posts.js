@@ -40,8 +40,8 @@ router.post('/login', async (req, res) => {
 router.post('/', async (req, res) => {
     const Login = loadUserCollection()
     const newUser = new Login({
-        username: req.body['acc'],
-        password: req.body['pw']
+        username: req.body.user.acc,
+        password: req.body.user.pw
     })
     await newUser.save((err) => {
         if (err) {
@@ -72,8 +72,8 @@ router.put('/', async (req, res) => {
         _id: '601217e1cc041b4ac8c406ba'
     }, {
         // update
-        username: req.body['acc'],
-        password: req.body['pw']
+        username: req.body.user.acc,
+        password: req.body.user.pw
     }, (err) => {
         if (err) {
             res.status(200).send('使用者更新失敗')

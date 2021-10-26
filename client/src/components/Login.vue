@@ -61,30 +61,31 @@ export default {
   methods: {
     async login () {
       this.loading = true
-      const article = {
-        acc: this.account,
-        pw: this.password
-      }
+        const article = {
+          acc: this.account,
+          pw: this.password
+        }
 
-    //   this.$http.delete('api/posts/' + article.acc).then(data => {
-    //     console.log(data.bodyText)
-    //   })
+        // [Delete]
+        // let result = await UserService.deleteUser('6177a5a9807c22001f5f9e24')
+        // console.log(result.data)
 
-    //   this.$http.put('api/posts', article).then(data => {
-    //     console.log(data.bodyText)
-    //   })
+        // [Create]
+        // let result = await UserService.insertUser(article)
+        // console.log(result.data)
 
-      let result = await UserService.checkUser(article)
-      console.log(result.data)
-      let isLogin
-      if (result.data === '使用者登入成功') {
-        isLogin = true
-        this.$router.push('/')
-      } else {
-        isLogin = false
-      }
-      this.$emit('updateIsLogin', isLogin)
-      this.$route.params.isLogin = isLogin
+        // [Check]
+        let result = await UserService.checkUser(article)
+        console.log(result.data)
+        let isLogin
+        if (result.data === '使用者登入成功') {
+          isLogin = true
+          this.$router.push('/')
+        } else {
+          isLogin = false
+        }
+        this.$emit('updateIsLogin', isLogin)
+        this.$route.params.isLogin = isLogin
 
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.loading = false
