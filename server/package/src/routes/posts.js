@@ -43,13 +43,23 @@ router.post('/', async (req, res) => {
         username: req.body.user.acc,
         password: req.body.user.pw
     })
-    await newUser.save((err) => {
-        if (err) {
-            res.status(200).send('使用者創建失敗')
-            return console.error(err)
+    await Login.find({
+        username: newUser.username,
+        password: newUser.password
+    }).countDocuments(async (err, count) => {
+        if (count < 1) {
+            await newUser.save((err) => {
+                if (!err) {
+                    res.status(201).send('使用者創建成功')
+                    return
+                }
+                res.status(200).send('使用者創建失敗')
+                return console.error(err)
+            })
+        } else {
+            res.status(200).send('使用者創建失敗 - [帳戶已存在]')
         }
     })
-    res.status(201).send('使用者創建成功')
 })
 
 // Delete User Data

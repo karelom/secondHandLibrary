@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Intro from '@/components/Intro'
-import Login from '@/components/Login'
-import Account from '@/components/Account'
+import Login from '@/components/auth/Login'
+import Account from '@/components/userInfo/Account'
+import Register from '@/components/auth/Register'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/Account',
       name: 'Account',
       component: Account
+    },
+    {
+      path: '/Register',
+      name: 'Register',
+      component: Register
     }
   ]
 })
