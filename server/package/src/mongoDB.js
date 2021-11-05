@@ -21,6 +21,7 @@ mongoose.connect(connectionURL, passOption, (err) => {
 
 // 登录模式
 const loginSchema = new mongoose.Schema({
+  cookie_token: String,
   username: String,
   password: String
   // ,userimg: {

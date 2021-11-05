@@ -46,7 +46,10 @@
       <v-container fluid>
         <keep-alive>
           <!-- If using vue-router -->
-          <router-view @updateIsLogin="check"></router-view>
+          <router-view
+            :account="user_account"
+            @updateIsLogin="check"
+          ></router-view>
         </keep-alive>
       </v-container>
     </v-main>
@@ -58,6 +61,7 @@
 </template>
 <script>
 import UserService from "./UserService";
+import UserCookie from "./UserCookie";
 
 export default {
   name: "App",
@@ -67,29 +71,46 @@ export default {
       isLogin: false,
       posts: [], // get the result of axios
       error: "", // get the error of axios
+      user_account: "",
     };
   },
   async created() {
-    try {
-      this.posts = await UserService.getUser();
-      console.log(this.posts);
-    } catch (err) {
-      this.error = err.message;
-    }
+    // try {
+    //   this.posts = await UserService.getDB();
+    //   console.log(this.posts[0]);
+    // } catch (err) {
+    //   this.error = err.message;
+    // }
   },
   async mounted() {
     this.$router.replace("/").catch(() => {});
 
     // todo: automatic insert default user to mongoDB
     let result = await UserService.insertUser({
+      token: "%u5317",
       acc: "test",
       pw: "1234",
     });
     console.log(result.data);
+
+    this.auto_login();
   },
   methods: {
     check(isLogin) {
       this.isLogin = isLogin;
+      if (this.isLogin) this.auto_login();
+    },
+    /* auto login user */
+    async auto_login() {
+      let token = UserCookie.getCookie();
+      if (token != undefined) {
+        this.posts = await UserService.getUser(token.toString());
+        this.isLogin = true;
+        console.log(`auto login: [${this.posts}]`);
+        this.user_account = this.posts;
+      } else {
+        console.log("token undefined");
+      }
     },
   },
   computed: {},

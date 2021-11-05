@@ -52,6 +52,7 @@
 
 <script>
 import UserService from "../../UserService";
+import UserCookie from "../../UserCookie";
 
 export default {
   name: "login",
@@ -70,6 +71,18 @@ export default {
   },
   props: {},
   methods: {
+    /* Route */
+    register() {
+      this.$router.replace("/Register");
+    },
+    reset_values() {
+      this.showPW = false;
+      this.loading = false;
+      this.account = "";
+      this.password = "";
+      this.reset_timer();
+    },
+    /* Login user auth */
     async login() {
       this.loading = true;
       const article = {
@@ -78,28 +91,28 @@ export default {
       };
 
       // [Delete]
-      // let result = await UserService.deleteUser('6177a5a9807c22001f5f9e24')
-      // console.log(result.data)
+      //   let result = await UserService.deleteUser("61837e68be105f001ff0b32d");
+      //   console.log(result.data);
 
       // [Check]
       let result = await UserService.checkUser(article);
-      console.log(result.data);
+      console.log(result);
       let isLogin;
-      if (result.data === "使用者登入成功") {
-        isLogin = true;
-        this.$router.replace("/");
-        this.account = "";
-        this.password = "";
-      } else {
+      if (result.data === "使用者登入失敗") {
         isLogin = false;
         this.countDown.show = true;
         this.count_down_timer();
+      } else {
+        isLogin = true;
+        UserCookie.setCookie(result.data);
+        this.$router.replace("/");
       }
       this.$emit("updateIsLogin", isLogin);
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
       this.loading = false;
     },
+    /* v-alert animation */
     count_down_timer() {
       if (this.countDown.show && this.countDown.timer > 0) {
         window.setTimeout(() => {
@@ -116,13 +129,6 @@ export default {
     },
     dismissible_close(value) {
       this.countDown.show = value;
-    },
-    register() {
-      this.$router.replace("/Register");
-    },
-    reset_values() {
-      this.showPW = false;
-      (this.account = ""), (this.password = ""), this.reset_timer();
     },
   },
   computed: {},

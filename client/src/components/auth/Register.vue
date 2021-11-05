@@ -7,7 +7,7 @@
       type="success"
       border="left"
       transition="slide-y-transition"
-      >{{ msg_success }}
+      >{{ msg.success }}
     </v-alert>
     <v-alert
       :value="valid === 2"
@@ -16,7 +16,7 @@
       type="error"
       border="left"
       transition="slide-y-transition"
-      >{{ msg_error }}
+      >{{ msg.error }}
     </v-alert>
     <v-form ref="form" lazy-validation @submit="check_form">
       <v-container>
@@ -70,12 +70,16 @@
 
 <script>
 import UserService from "../../UserService";
+import UserCookie from "../../UserCookie";
+
 export default {
   name: "register",
   data() {
     return {
-      msg_success: "You're now Registered!",
-      msg_error: "Registration failed!",
+      msg: {
+        success: "You're now Registered!",
+        error: "Registration failed!",
+      },
       valid: 0,
       showPW1: false,
       showPW2: false,
@@ -98,6 +102,7 @@ export default {
     };
   },
   methods: {
+    /* Route */
     reset_values() {
       this.valid = 0;
       this.showPW1 = false;
@@ -106,10 +111,12 @@ export default {
       this.user.password = "";
       this.user.pw_confirm = "";
     },
+    /* Register user */
     async check_form() {
       if (!this.$refs.form.validate()) return;
 
       let result = await UserService.insertUser({
+        token: UserCookie.random_value(),
         acc: this.user.name,
         pw: this.user.password,
       });

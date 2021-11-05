@@ -1,9 +1,9 @@
 <template>
   <div>
-    <UserInfo>
-      <template v-slot="{ users }">
+    <UserInfo :account="account">
+      <!-- <template v-slot="{ users }">
         <h1>Welcome to Ficusdata, {{ users.firstName }}!</h1>
-      </template>
+      </template> -->
     </UserInfo>
 
     <v-dialog v-model="dialog_visible" persistent max-width="290">
@@ -14,7 +14,7 @@
         <v-card-title class="text-h5">
           Are you sure you want to logout?
         </v-card-title>
-        <v-card-text>We will miss you.</v-card-text>
+        <v-card-text>We will miss you, {{ account }}.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="darken-1" text @click="dialog_visible = false">
@@ -28,10 +28,15 @@
 </template>
 
 <script>
+import UserCookie from "../../UserCookie";
+
 export default {
   name: "account",
   components: {
     UserInfo: () => import("./UserInfo.vue"), // prevent circular reference
+  },
+  props: {
+    account: String,
   },
   data() {
     return {
@@ -43,6 +48,8 @@ export default {
     logout() {
       this.dialog_visible = false;
       this.$emit("updateIsLogin", false);
+      UserCookie.rmCookie();
+      console.log("token removed");
       this.$router.replace("/Login");
     },
   },
